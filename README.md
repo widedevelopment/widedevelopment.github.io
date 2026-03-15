@@ -1,1 +1,1 @@
-# widedev.github.io
+# widedevelopment.github.io
