@@ -389,7 +389,7 @@
                     <div class="stat-label">Toplam Müşteri</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number animated" data-target="0">0</div>
+                    <div class="stat-number animated" data-target="11">11</div>
                     <div class="stat-label">Wide Personel</div>
                 </div>
             </div>
@@ -502,7 +502,8 @@
 
                     <button class="package-button" data-product-type="package" data-product-id="1"
                         data-product-name="Whitelist V1"
-                        data-youtube-url="https://www.youtube.com/watch?v=4G2xg04yGEM">İncele</button>
+                        data-youtube-url="https://www.youtube.com/watch?v=4G2xg04yGEM"
+                        data-buy-url="https://www.itemsatis.com/fivem/widedevelopment-sosyal-sunucu-paketiv1-5015257.html">İncele</button>
                 </div>
 
 
@@ -689,11 +690,26 @@
 
                         <div class="testimonial-card">
                             <div class="testimonial-quote">
-                                <span class="quote-mark quote-open">"</span>
+                                <div class="testimonial-rating">
+                                    <svg class="star-icon filled" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <svg class="star-icon filled" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <svg class="star-icon filled" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <svg class="star-icon filled" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <svg class="star-icon filled" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                </div>
                                 <p class="testimonial-text">
                                     Kalitenin Adresi Hizmet Efsane
                                 </p>
-                                <span class="quote-mark quote-close">"</span>
                             </div>
                             <div class="testimonial-author">
 
@@ -722,6 +738,39 @@
             <div class="testimonials-dots" id="testimonialsDots"></div>
         </div>
     </section>
+
+    <!-- Package Detail Modal -->
+    <div id="packageModal" class="package-modal">
+        <div class="package-modal-content">
+            <button class="package-modal-close" onclick="closePackageModal()">×</button>
+            <h2 class="package-modal-title" id="packageModalTitle">Whitelist V1</h2>
+            
+            <div class="package-modal-body">
+                <div class="package-video-container">
+                    <iframe id="packageVideoFrame" width="100%" height="400" 
+                        src="" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div class="package-modal-actions">
+                    <button class="package-modal-btn package-modal-btn-primary" id="packageBuyBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Satın Al
+                    </button>
+                    <button class="package-modal-btn package-modal-btn-secondary" onclick="closePackageModal()">
+                        Kapat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="footer-container">

@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Package button click handler - İncele butonu Discord'a veya YouTube'a yönlendirir
+// Package button click handler - İncele butonu modal açar veya Discord'a yönlendirir
 document.addEventListener('click', async (e) => {
     const button = e.target.classList.contains('package-button') ? e.target : e.target.closest('.package-button');
     if (button && button.classList.contains('package-button')) {
@@ -138,8 +138,18 @@ document.addEventListener('click', async (e) => {
         e.stopPropagation();
         e.stopImmediatePropagation();
 
-        // YouTube URL varsa direkt oraya git
+        // YouTube URL ve Buy URL varsa modal aç
         const youtubeUrl = button.getAttribute('data-youtube-url');
+        const buyUrl = button.getAttribute('data-buy-url');
+        const productName = button.getAttribute('data-product-name');
+        
+        if (youtubeUrl && buyUrl) {
+            console.log('Modal açılıyor:', productName);
+            openPackageModal(youtubeUrl, buyUrl, productName);
+            return;
+        }
+
+        // YouTube URL varsa direkt oraya git
         if (youtubeUrl) {
             window.open(youtubeUrl, '_blank');
             return;
@@ -151,7 +161,6 @@ document.addEventListener('click', async (e) => {
         // Product bilgilerini al
         const productType = button.getAttribute('data-product-type');
         const productId = button.getAttribute('data-product-id');
-        const productName = button.getAttribute('data-product-name');
 
         if (!productType || !productId || !productName) {
             return;
@@ -765,3 +774,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+// Package Modal Functions
+function openPackageModal(youtubeUrl, buyUrl, productName) {
+    const modal = document.getElementById('packageModal');
+    const videoFrame = document.getElementById('packageVideoFrame');
+    const buyBtn = document.getElementById('packageBuyBtn');
+    const modalTitle = document.getElementById('packageModalTitle');
+    
+    if (modal && videoFrame && buyBtn) {
+        // YouTube URL'yi embed formatına çevir
+        const videoId = youtubeUrl.split('v=')[1] || youtubeUrl.split('/').pop();
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        
+        videoFrame.src = embedUrl;
+        modalTitle.textContent = productName || 'Paket Detayları';
+        
+        // Satın al butonuna tıklama eventi
+        buyBtn.onclick = function() {
+            window.open(buyUrl, '_blank');
+        };
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closePackageModal() {
+    const modal = document.getElementById('packageModal');
+    const videoFrame = document.getElementById('packageVideoFrame');
+    
+    if (modal && videoFrame) {
+        modal.classList.remove('active');
+        videoFrame.src = '';
+        document.body.style.overflow = '';
+    }
+}
+
+// Modal dışına tıklayınca kapat
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('packageModal');
+    if (e.target === modal) {
+        closePackageModal();
+    }
+});
+
+// ESC tuşu ile kapat
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closePackageModal();
+    }
+});
+
+
