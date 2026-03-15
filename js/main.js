@@ -130,13 +130,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Package button click handler - İncele butonu Discord'a yönlendirir
+// Package button click handler - İncele butonu Discord'a veya YouTube'a yönlendirir
 document.addEventListener('click', async (e) => {
     const button = e.target.classList.contains('package-button') ? e.target : e.target.closest('.package-button');
     if (button && button.classList.contains('package-button')) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
+
+        // YouTube URL varsa direkt oraya git
+        const youtubeUrl = button.getAttribute('data-youtube-url');
+        if (youtubeUrl) {
+            window.open(youtubeUrl, '_blank');
+            return;
+        }
 
         const packageCard = button.closest('.package-card');
         const packagesSection = packageCard.closest('.packages-section');
@@ -705,3 +712,56 @@ async function fetchDiscordOnlineMembers() {
         onlineMembersElement.textContent = '-';
     }
 }
+
+
+// Language Dropdown Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const langDropdown = document.querySelector('.lang-switcher-dropdown');
+    const langCurrent = document.getElementById('langCurrent');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    if (langCurrent && langDropdown) {
+        // Toggle dropdown
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('active');
+            }
+        });
+
+        // Handle language selection
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const lang = option.getAttribute('data-lang');
+                const flag = option.getAttribute('data-flag');
+                const name = option.getAttribute('data-name');
+                
+                // Update current language display
+                const currentFlag = langCurrent.querySelector('.lang-flag');
+                const currentName = langCurrent.querySelector('.lang-name');
+                if (currentFlag) currentFlag.textContent = flag;
+                if (currentName) currentName.textContent = lang.toUpperCase();
+                
+                // Update active state
+                langOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Close dropdown
+                langDropdown.classList.remove('active');
+                
+                // Change language
+                if (typeof setLocale === 'function') {
+                    setLocale(lang);
+                }
+            });
+        });
+    }
+});
